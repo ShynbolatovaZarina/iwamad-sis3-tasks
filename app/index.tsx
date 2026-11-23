@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import TaskRow from '../src/components/TaskRow';
 import { useTasks } from '../src/context/TasksContext';
 
@@ -8,6 +8,12 @@ export default function TaskListScreen() {
 
   return (
     <View style={styles.container}>
+      <Pressable
+        onPress={() => router.push('/new')}
+        style={({ pressed }) => [styles.addButton, pressed && styles.addButtonPressed]}
+      >
+        <Text style={styles.addButtonText}>+ New task</Text>
+      </Pressable>
       <FlatList
         data={tasks}
         keyExtractor={(task) => String(task.id)}
@@ -29,6 +35,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     padding: 16,
+  },
+  addButton: {
+    minHeight: 44,
+    marginBottom: 12,
+    borderRadius: 8,
+    backgroundColor: '#1d4ed8',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  addButtonPressed: {
+    backgroundColor: '#1e3a8a',
+  },
+  addButtonText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#fff',
   },
   row: {
     marginBottom: 12,

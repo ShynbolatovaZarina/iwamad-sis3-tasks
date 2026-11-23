@@ -11,6 +11,10 @@ export default function RootLayout() {
     <TasksProvider>
       <Stack>
         <Stack.Screen name="index" options={{ title: 'My tasks' }} />
+        <Stack.Screen
+          name="new"
+          options={{ title: 'New task', presentation: 'modal', animation: 'slide_from_bottom' }}
+        />
       </Stack>
     </TasksProvider>
   );
