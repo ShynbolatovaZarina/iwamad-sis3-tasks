@@ -2,6 +2,7 @@
   "expo": {
     "name": "iwamad-sis3-tasks",
     "slug": "iwamad-sis3-tasks",
+    "scheme": "iwamadtasks",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,6 +21,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "experiments": {
+      "baseUrl": "/iwamad-sis3-tasks"
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }
