@@ -4,7 +4,7 @@ import TaskRow from '../src/components/TaskRow';
 import { useTasks } from '../src/context/TasksContext';
 
 export default function TaskListScreen() {
-  const { tasks } = useTasks();
+  const { tasks, deleteTask, toggleDone } = useTasks();
 
   return (
     <View style={styles.container}>
@@ -14,13 +14,19 @@ export default function TaskListScreen() {
       >
         <Text style={styles.addButtonText}>+ New task</Text>
       </Pressable>
+      <Text style={styles.hint}>
+        Swipe a task left to delete it. Long-press a task to mark it done.
+      </Text>
       <FlatList
         data={tasks}
         keyExtractor={(task) => String(task.id)}
         renderItem={({ item }) => (
-          <View style={styles.row}>
-            <TaskRow task={item} onPress={() => router.push(`/tasks/${item.id}`)} />
-          </View>
+          <TaskRow
+            task={item}
+            onPress={() => router.push(`/tasks/${item.id}`)}
+            onToggleDone={() => toggleDone(item.id)}
+            onDelete={() => deleteTask(item.id)}
+          />
         )}
         ListEmptyComponent={
           <Text style={styles.empty}>No tasks yet. Add your first task!</Text>
@@ -52,7 +58,9 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#fff',
   },
-  row: {
+  hint: {
+    fontSize: 14,
+    color: '#4b5563',
     marginBottom: 12,
   },
   empty: {
